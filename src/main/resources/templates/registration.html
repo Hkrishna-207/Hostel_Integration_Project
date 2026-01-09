@@ -34,6 +34,14 @@
                 <option value="other">Other</option>
             </select>
         </div>
+
+        <div class="form-group">
+            <label>I am a:</label>
+            <select name="role" required>
+                <option value="ROLE_USER">Student / User</option>
+                <option value="ROLE_ADMIN">Hostel Owner (Admin)</option>
+            </select>
+        </div>
         <div class="form-group">
             <label>Password</label>
             <input type="password" id="password" name="password" required>
@@ -55,7 +63,7 @@
 
         if (pass !== confirmPass) {
             errorSpan.style.display = "block";
-            return false; // Prevents form from submitting
+            return false; 
         }
         errorSpan.style.display = "none";
         return true;

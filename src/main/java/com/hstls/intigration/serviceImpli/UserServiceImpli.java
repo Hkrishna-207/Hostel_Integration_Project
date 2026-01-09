@@ -27,12 +27,15 @@ public class UserServiceImpli implements UserService {
 		if(user==null) {
 			throw new UsernameNotFoundException("user not found with email : "+email);
 		}
-		
+		String userRole = user.getRole();
+	    if (userRole == null) {
+	        userRole = "ROLE_USER"; // Default to USER if null in DB
+	    }
 		//convert the  database user into spring's UserDetails Object
 		return org.springframework.security.core.userdetails.User
 				.withUsername(user.getEmail())
 				.password(user.getPassword())
-				.roles("USER")
+				.roles(userRole.replace("ROLE_", ""))// spring adds role automatically
 				.build();
 	}
 
