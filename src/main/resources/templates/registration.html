@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Register - My App</title>
+    <style>
+        body { font-family: sans-serif; display: flex; justify-content: center; background-color: #f4f4f9; padding-top: 50px; }
+        .reg-container { background: white; padding: 2rem; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); width: 350px; }
+        .form-group { margin-bottom: 1rem; }
+        label { display: block; margin-bottom: 0.3rem; font-size: 0.9rem; }
+        input, select { width: 100%; padding: 0.5rem; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box; }
+        .btn-submit { width: 100%; padding: 0.7rem; background-color: #28a745; color: white; border: none; border-radius: 4px; cursor: pointer; }
+        .error-msg { color: red; font-size: 0.8rem; display: none; margin-top: 0.2rem; }
+    </style>
+</head>
+<body>
+
+<div class="reg-container">
+    <h2>Create Account</h2>
+    <form th:action="@{/register}" method="post" onsubmit="return validatePasswords()">
+        <div class="form-group">
+            <label>Full Name</label>
+            <input type="text" name="name" required>
+        </div>
+        <div class="form-group">
+            <label>Email</label>
+            <input type="email" name="email" required>
+        </div>
+        <div class="form-group">
+            <label>Gender</label>
+            <select name="gender">
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Other</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Password</label>
+            <input type="password" id="password" name="password" required>
+        </div>
+        <div class="form-group">
+            <label>Confirm Password</label>
+            <input type="password" id="confirmPassword" required>
+            <span id="passError" class="error-msg">Passwords do not match!</span>
+        </div>
+        <button type="submit" class="btn-submit">Register</button>
+    </form>
+</div>
+
+<script>
+    function validatePasswords() {
+        const pass = document.getElementById("password").value;
+        const confirmPass = document.getElementById("confirmPassword").value;
+        const errorSpan = document.getElementById("passError");
+
+        if (pass !== confirmPass) {
+            errorSpan.style.display = "block";
+            return false; // Prevents form from submitting
+        }
+        errorSpan.style.display = "none";
+        return true;
+    }
+</script>
+
+</body>
+</html>
