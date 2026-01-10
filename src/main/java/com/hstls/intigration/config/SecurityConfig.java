@@ -29,7 +29,7 @@ public class SecurityConfig {
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
 		http
 			.authorizeHttpRequests(auth -> auth
-					.requestMatchers("/login","/log","/register").permitAll()
+					.requestMatchers("/","/login","/log","/register").permitAll()
 					.requestMatchers("/admin/**").hasRole("ADMIN")
 					.requestMatchers("/user/**").hasRole("USER")
 					.anyRequest().authenticated()
@@ -39,7 +39,9 @@ public class SecurityConfig {
 					.successHandler(successHandler)
 					.permitAll()
 				)
-			.logout(logout -> logout.logoutSuccessUrl("/")
+			.logout(logout -> logout
+					.logoutUrl("/logout")
+					.logoutSuccessUrl("/?logout=true").permitAll()
 			);
 		return http.build();
 	}

@@ -4,10 +4,14 @@
     <title>Dashboard</title>
 </head>
 <body>
-    <h1 style="align-content: 'center'; color: 'purple'">Welcome to your Dashboard!</h1>
+    <h1 style="text-align: center; color: purple">Welcome to your Dashboard!</h1>
     <p>You have successfully logged in.</p>
     
-    <form th:action="@{/}" method="get">
+    <form th:action="@{/user/showhostels}">
+    	<button type="submit">View Hostels</button>
+    </form>
+    
+    <form th:action="@{/logout}" method="post">
         <button type="submit">Logout</button>
     </form>
 </body>

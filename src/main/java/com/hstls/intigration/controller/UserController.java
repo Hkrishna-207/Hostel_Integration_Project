@@ -49,5 +49,10 @@ public class UserController {
 
 		return "redirect:/log?success";
 	}
+	
+	@GetMapping("/user/showhostels")
+	public String showListOfHostels() {
+		return "showHostels";
+	}
 
 }

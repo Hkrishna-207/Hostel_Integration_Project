@@ -5,6 +5,10 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<div th:if="${param.logout}" style = "color: green; text-align:center;">
+		You have been logged out successfully....!
+	</div>
+	
 	<h1>Welcome to Hostlers intigration Project</h1>
 	<button><a th:href="@{/log}" >Login</a></button>
 	<button><a th:href="@{/register}" >Register</a></button>

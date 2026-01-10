@@ -5,8 +5,25 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1 style="align-content: 'center'; color:'red'">Admin Dashboard</h1>
-	<form th:action="@{/}" method="get">
+	
+	<h1 style="text-align: center; color:red">Admin Dashboard</h1>
+	<form action="">
+		<button type="submit">Hostel List</button>
+	</form>
+	
+	<form th:action="@{/admin/addhostel}" >
+		<button type="submit">Add Hostel</button>
+	</form>
+	
+	<form action="">
+		<button>Update Hostel</button>
+	</form>
+	
+	<form th:action="@{/admin/removehostel}">
+		<button>Delete Hostel</button>
+	</form>
+	
+	<form th:action="@{/logout}" method="post">
 		<button type="submit">Logout</button>
 	</form>
 </body>
