@@ -1,14 +1,19 @@
 package com.hstls.intigration.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.hstls.intigration.models.Hostel;
 import com.hstls.intigration.models.User;
+import com.hstls.intigration.repository.HostelRepository;
 import com.hstls.intigration.repository.UserRepository;
 
 @Controller
@@ -16,6 +21,8 @@ public class UserController {
 	
 	@Autowired
 	private UserRepository userRepo;
+	@Autowired
+	private HostelRepository hstlRepo;
 	
 	@Autowired
 	private PasswordEncoder passwordEncoder;
@@ -51,7 +58,9 @@ public class UserController {
 	}
 	
 	@GetMapping("/user/showhostels")
-	public String showListOfHostels() {
+	public String showListOfHostels(Model model) {
+		List<Hostel> hostels=hstlRepo.findAll();
+		model.addAttribute("hostels",hostels);
 		return "showHostels";
 	}
 

@@ -6,5 +6,26 @@
 </head>
 <body>
 	<h1>Hostel data</h1><p>Hostel data </p>
+	<table border="1">
+		<thead>
+			<tr>
+				<th>hostel Name</th>
+				<th>Hostel Owner</th>
+				<th>Hostel Contact No</th>
+				<th>Hostel Address</th>
+				<th>hostel Rating</th>
+				<th>Apply for Seat</th>
+			</tr>
+		</thead>
+		<tbody >
+			<tr th:each = "h:${hostels}" >
+				<td th:text="${h.name}"></td>
+				<td th:text="${h.ownerName}"></td>
+				<td th:text="${h.contactNumber}"></td>
+				<td th:text="${h.address}"></td>
+				<td th:text="${h.rating}"></td>
+				<td><button>Apply for Seat</button></td>
+		</tbody>
+	</table>
 </body>
 </html>
