@@ -10,6 +10,23 @@
     <form th:action="@{/user/showhostels}">
     	<button type="submit">View Hostels</button>
     </form>
+    <div style="background-color: #f4f4f4; padding: 20px; border-radius: 10px; margin: 20px 0;">
+    <h3>Search Hostels</h3>
+    <form th:action="@{/user/showhostels}" method="get">
+        <input type="text" name="name" placeholder="Search by Name...">
+        <input type="text" name="location" placeholder="Search by Location...">
+        
+        <select name="rating">
+            <option value="">Select Rating</option>
+            <option value="5">5 Stars</option>
+            <option value="4">4+ Stars</option>
+            <option value="3">3+ Stars</option>
+        </select>
+        
+        <button type="submit" style="background-color: purple; color: white;">Search</button>
+        <a th:href="@{/user/showhostels}" style="font-size: 0.8em;">Clear Filters</a>
+    </form>
+</div>
     
     <form th:action="@{/logout}" method="post">
         <button type="submit">Logout</button>

@@ -10,11 +10,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.hstls.intigration.models.Hostel;
 import com.hstls.intigration.models.User;
 import com.hstls.intigration.repository.HostelRepository;
 import com.hstls.intigration.repository.UserRepository;
+
+import jakarta.websocket.server.PathParam;
 
 @Controller
 public class UserController {
@@ -58,9 +61,11 @@ public class UserController {
 	}
 	
 	@GetMapping("/user/showhostels")
-	public String showListOfHostels(Model model) {
-		List<Hostel> hostels=hstlRepo.findAll();
-		model.addAttribute("hostels",hostels);
+	public String showListOfHostels(@RequestParam(required = false) String name,@RequestParam(required = false) String location,@RequestParam(required = false) String rating,Model model) {
+		
+		List<Hostel> resultList=hstlRepo.filterHostels(name, location, rating.isEmpty()?0:Integer.parseInt(rating));
+
+		model.addAttribute("hostels",resultList);
 		return "showHostels";
 	}
 

@@ -6,7 +6,12 @@
 </head>
 <body>
 	<h1>Hostel data</h1><p>Hostel data </p>
-	<table border="1">
+	<h3 th:if="${hostels.isEmpty()}" style="text-align:center; color:red;">No Hostels found for those filters</h3>
+	<h3 th:if="${!hostels.isEmpty()}" style="text-align:center; color:purple;">
+		Found <span th:text="${hostels.size()}">0</span> Hostels matching your search
+	</h3>
+	
+	<table border="1" th:if="${!hostels.isEmpty()}">
 		<thead>
 			<tr>
 				<th>hostel Name</th>
