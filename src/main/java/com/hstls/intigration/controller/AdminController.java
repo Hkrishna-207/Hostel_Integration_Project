@@ -1,6 +1,7 @@
 package com.hstls.intigration.controller;
 
 import java.security.Principal;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,6 +30,15 @@ public class AdminController {
 		return "adminDashboard";
 	}
 	
+	@GetMapping("/hostel_list")
+	public String showHostelList(Model model,Principal principal) {
+		String email=principal.getName();
+		//User currentAdmin=userRepo.findByEmail(email);
+		List<Hostel> adminHostels=hstlRepo.findAllByOwnerEmail(email);
+		model.addAttribute("hostels",adminHostels);
+		return "adminHostelList";
+	}
+	
 	@GetMapping("/addhostel")
 	public String showAddHostelPage(Model model, Principal principal) {
 		String email=principal.getName();
@@ -44,6 +54,7 @@ public class AdminController {
 		User currentUser=userRepo.findByEmail(email);
 		//Set the user object as the owner (JPA handles the Id/email link)
 		hostel.setOwner(currentUser);
+		hostel.setOwnerName(currentUser.getName());
 		hstlRepo.save(hostel);
 		
 		return "redirect:/admin/dashboard";

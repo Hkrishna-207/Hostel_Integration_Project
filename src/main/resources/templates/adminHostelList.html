@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Admin connected hostels</title>
+</head>
+<body>
+	<h1 th:if="${hostels.isEmpty()}" style="text-align:center; color:red; ">You do not added any hostels Yet
+		<p>Click <a th:href="@{/admin/addhostel}">Here</a>to add Hostel </h1>
+		
+	<div th:if="${!hostels.isEmpty()}">
+		<p><bold> Total Records Found : <span th:text="${hostels.size()}">0</span></bold></p>
+		<table border="2">
+			<thead>
+				<tr>
+					<th>Hostel Name</th>
+					<th>Hostel Address</th>
+					<th>See More Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="h:${hostels}">
+					<td th:text="${h.name}"></td>
+					<td th:text="${h.address}"></td>
+					<td>See More</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</body>
+</html>

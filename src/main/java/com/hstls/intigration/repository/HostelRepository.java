@@ -17,4 +17,6 @@ public interface HostelRepository extends JpaRepository<Hostel, Long> {
 	"(:location is NULL OR h.address LIKE %:location%) AND "+
 	"(:rating is NULL OR h.rating>=:rating)")
 	List<Hostel> filterHostels(@Param("name") String name,@Param("location") String location,@Param("rating") int rating);
+
+	List<Hostel> findAllByOwnerEmail(String email);
 }

@@ -26,6 +26,14 @@
 			<label>Hostel Location</label> <input type="text" th:field="*{address}">
 		</div>
 		<div>
+			<label>Select the Gender Category</label>
+			<Select th:field="*{genderType}">
+				<option th:value="male">Male PG</option>
+				<option th:value="female">Female PG</option>
+				<option th:value="both">Both</option>
+			</Select>
+		</div>
+		<div>
 			<label>Established In</label> <input type="date" th:field="*{dateCreated}">
 		</div>
 		<button type="submit"> ADD </button>
