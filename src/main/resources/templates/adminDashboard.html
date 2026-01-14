@@ -3,8 +3,39 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+	<style>
+    .toast-alert {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background-color: #4CAF50; /* Green */
+        color: white;
+        padding: 16px;
+        border-radius: 8px;
+        box-shadow: 0px 4px 10px rgba(0,0,0,0.2);
+        z-index: 1000;
+        min-width: 250px;
+        transition: opacity 0.5s ease-out; /* Smooth fade out */
+    }
+    .toast-content {
+        display: flex;
+        align-items: center;
+        font-weight: bold;
+    }
+    .check-icon {
+        margin-right: 10px;
+        font-size: 20px;
+    }
+	</style>
 </head>
 <body>
+
+	<div th:if="${message}" id="success-toast" class="toast-alert">
+    <div class="toast-content">
+        <span class="check-icon">✔</span>
+        <span th:text="${message}"></span>
+    </div>
+	</div>
 	
 	<h1 style="text-align: center; color:red">Admin Dashboard</h1>
 	<form th:action="@{/admin/hostel_list}">
@@ -26,5 +57,23 @@
 	<form th:action="@{/logout}" method="post">
 		<button type="submit">Logout</button>
 	</form>
+	
+	<script>
+    window.onload = function() {
+        var toast = document.getElementById('success-toast');
+        if (toast) {
+            // Wait 3 seconds (3000 milliseconds)
+            setTimeout(function() {
+                // Fade out effect
+                toast.style.opacity = '0';
+                
+                // Remove from screen entirely after fade
+                setTimeout(function() {
+                    toast.style.display = 'none';
+                }, 500); 
+            }, 3000);
+        }
+    };
+	</script>
 </body>
 </html>

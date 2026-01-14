@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.hstls.intigration.models.Hostel;
 import com.hstls.intigration.models.User;
@@ -44,18 +45,21 @@ public class AdminController {
 		String email=principal.getName();
 		User adminUser=userRepo.findByEmail(email);
 		model.addAttribute("adminUser",adminUser);
-		model.addAttribute("hostel",new Hostel());
+		Hostel hostel=new Hostel();
+		hostel.setOwnerName(adminUser.getName());
+		model.addAttribute("hostel",hostel);
 		return "addHostel";
 	}
 	
 	@PostMapping("/addhostel/save")
-	public String saveTheAddedHostel(@ModelAttribute Hostel hostel,Principal principal) {
+	public String saveTheAddedHostel(@ModelAttribute Hostel hostel,Principal principal,RedirectAttributes redirectAttributes) {
 		String email=principal.getName();
 		User currentUser=userRepo.findByEmail(email);
 		//Set the user object as the owner (JPA handles the Id/email link)
 		hostel.setOwner(currentUser);
 		hostel.setOwnerName(currentUser.getName());
 		hstlRepo.save(hostel);
+		redirectAttributes.addFlashAttribute("message",hostel.getName()+ "Hostel added Successfully");
 		
 		return "redirect:/admin/dashboard";
 		

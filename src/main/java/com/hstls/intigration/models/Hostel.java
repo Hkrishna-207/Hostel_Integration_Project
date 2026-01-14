@@ -34,4 +34,9 @@ public class Hostel {
 	private int rating;
 	private String genderType;
 	private LocalDate dateCreated;
+	private Integer fourShareCount;
+	private Integer threeShareCount;
+	private Integer twoShareCount;
+	private Integer oneShareCount;
+	
 }

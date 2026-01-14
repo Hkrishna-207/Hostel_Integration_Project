@@ -13,14 +13,15 @@
 				 required>
 		</div>
 		<div>
-			<label>Owner Name</label> <input type="text" name="ownername"
-				th:value="${adminUser.name}" th:field="*{ownerName}" readonly>
+			<label>Owner Name</label> <input type="text" name="ownername" th:field="*{ownerName}"
+				  readonly>
 		</div>
 		<div>
 			<label>Owner email</label> <input type="email" name="ownerEmail" th:value="${adminUser.email}" readonly>
 		</div>
 		<div>
-			<label>Contact Number</label> <input type="number" th:field="*{contactNumber}">
+			<label>Contact Number</label> <input type="tel" pattern="[1-9][0-9]{9}"
+			title="Please enter a valid 10 digit Indian number" th:field="*{contactNumber}" required>
 		</div>
 		<div>
 			<label>Hostel Location</label> <input type="text" th:field="*{address}">
@@ -36,6 +37,24 @@
 		<div>
 			<label>Established In</label> <input type="date" th:field="*{dateCreated}">
 		</div>
+		<div>
+        <label>Number of 4-Share Rooms:</label>
+        <input type="number" th:field="*{fourShareCount}" min="0" placeholder="0">
+    </div>
+
+    <div>
+        <label>Number of 3-Share Rooms:</label>
+        <input type="number" th:field="*{threeShareCount}" min="0" placeholder="0">
+    </div>
+    <div>
+        <label>Number of 2-Share Rooms:</label>
+        <input type="number" th:field="*{fourShareCount}" min="0" placeholder="0">
+    </div>
+
+    <div>
+        <label>Number of 1-Share Rooms:</label>
+        <input type="number" th:field="*{threeShareCount}" min="0" placeholder="0">
+    </div>
 		<button type="submit"> ADD </button>
 	</form>
 </body>
