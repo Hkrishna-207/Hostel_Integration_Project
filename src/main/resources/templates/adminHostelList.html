@@ -31,7 +31,7 @@
 					<td><a th:href="@{/user/hostel-details/{id}(id=${h.id})}"
 						style="text-decoration: none;"> <span
 							style="color: blue; margin-right: 10px;">See More</span>
-					</a> <a th:href="@{/admin/dashboard}"
+					</a> <a th:href="@{/admin/removehostel/{id}(id=${h.id})}"
 						onclick="return confirm('Are you sure you want to delete this hostel?');"
 						style="text-decoration: none;"> <span style="color: red;">Remove</span>
 					</a></td>
