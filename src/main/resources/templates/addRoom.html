@@ -5,20 +5,33 @@
 <title>Add Room Details</title>
 </head>
 <body>
-	<form action="">
+	<h2>
+		Add a new Room to <span th:text="${hostel.name}"></span>
+	</h2>
+	<form th:action="@{/admin/addroom/save}" th:object="${room}"
+		method="post">
 		<div>
-			<label>Room No :</label> <input type="number" name="room_no">
+			<input type="hidden" name="hostelId" th:value="${hostel.id}">
 		</div>
 		<div>
-			<label>Room sharing</label> <Select name="No of Beds Sharing">
-				<option value="">No of Beds Sharing</option>
-				<option value="5">5 Share</option>
-				<option value="4">4 Share</option>
-				<option value="4">3 Share</option>
-				<option value="4">2 Share</option>
-				<option value="4">1 Share</option>
+			<label>Room Number :</label> <input type="text" th:field="*{roomNo}"
+				required>
+		</div>
+		<div>
+			<label>Room sharing</label> <Select th:field="*{bedCount}">
+				<option th:value="null">No of Beds Sharing</option>
+				<option th:value="5">5 Share</option>
+				<option th:value="4">4 Share</option>
+				<option th:value="4">3 Share</option>
+				<option th:value="4">2 Share</option>
+				<option th:value="4">1 Share</option>
 			</Select>
 		</div>
+		<div>
+			<label>Price per Bed :</label> <input type="number"
+				th:field="*{pricePerBed}" step="0.01" required>
+		</div>
+		<button type="submit" style="color: green;">Add Room</button>
 	</form>
 </body>
 </html>

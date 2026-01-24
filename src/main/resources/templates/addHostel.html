@@ -7,55 +7,45 @@
 <body>
 
 	<h1>Add The Hostel</h1>
-	<form th:action="@{/admin/addhostel/save}" th:object="${hostel}" method="post">
+	<form th:action="@{/admin/addhostel/save}" th:object="${hostel}"
+		method="post">
 		<div>
 			<label>Hostel Name</label> <input type="text" th:field="*{name}"
-				 required>
+				required>
 		</div>
 		<div>
-			<label>Owner Name</label> <input type="text" name="ownername" th:field="*{ownerName}"
-				  readonly>
+			<label>Owner Name</label> <input type="text" name="ownername"
+				th:field="*{ownerName}" readonly>
 		</div>
 		<div>
-			<label>Owner email</label> <input type="email" name="ownerEmail" th:value="${adminUser.email}" readonly>
+			<label>Owner email</label> <input type="email" name="ownerEmail"
+				th:value="${adminUser.email}" readonly>
 		</div>
 		<div>
-			<label>Contact Number</label> <input type="tel" pattern="[6-9][0-9]{9}"
-			title="Please enter a valid 10 digit Indian number" th:field="*{contactNumber}" required>
+			<label>Contact Number</label> <input type="tel"
+				pattern="[6-9][0-9]{9}"
+				title="Please enter a valid 10 digit Indian number"
+				th:field="*{contactNumber}" required>
 		</div>
 		<div>
-			<label>Hostel Location</label> <input type="text" th:field="*{address}">
+			<label>Hostel Location</label> <input type="text"
+				th:field="*{address}">
 		</div>
 		<div>
-			<label>Select the Gender Category</label>
-			<Select th:field="*{genderType}">
+			<label>Select the Gender Category</label> <Select
+				th:field="*{genderType}">
 				<option th:value="male">Male PG</option>
 				<option th:value="female">Female PG</option>
-				<option th:value="both">Both</option>
+				<option th:value="both">Co Living PG</option>
 			</Select>
 		</div>
 		<div>
-			<label>Established In</label> <input type="date" th:field="*{dateCreated}">
+			<label>Established In</label> <input type="date"
+				th:field="*{dateCreated}">
 		</div>
 		<div>
-        <label>Number of 4-Share Rooms:</label>
-        <input type="number" th:field="*{fourShareCount}" min="0" placeholder="0">
-    </div>
-
-    <div>
-        <label>Number of 3-Share Rooms:</label>
-        <input type="number" th:field="*{threeShareCount}" min="0" placeholder="0">
-    </div>
-    <div>
-        <label>Number of 2-Share Rooms:</label>
-        <input type="number" th:field="*{twoShareCount}" min="0" placeholder="0">
-    </div>
-
-    <div>
-        <label>Number of 1-Share Rooms:</label>
-        <input type="number" th:field="*{oneShareCount}" min="0" placeholder="0">
-    </div>
-		<button type="submit"> ADD </button>
+			<button type="submit">ADD</button>
+		</div>
 	</form>
 </body>
 </html>

@@ -14,9 +14,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.hstls.intigration.models.Hostel;
+import com.hstls.intigration.models.Room;
 import com.hstls.intigration.models.User;
 import com.hstls.intigration.repository.HostelRepository;
+import com.hstls.intigration.repository.RoomRepository;
 import com.hstls.intigration.repository.UserRepository;
+
+import jakarta.websocket.server.PathParam;
 
 @Controller
 @RequestMapping("/admin")
@@ -26,6 +30,8 @@ public class AdminController {
 	private UserRepository userRepo;
 	@Autowired
 	private HostelRepository hstlRepo;
+	@Autowired
+	private RoomRepository roomRepo;
 
 	@GetMapping("/dashboard")
 	public String showAdminDashboard() {
@@ -74,9 +80,19 @@ public class AdminController {
 	}
 	
 	@GetMapping("/addroom/{id}")
-	public String showHostelDetails(@PathVariable Long id, Model model) {
-		Hostel hostel=hstlRepo.getById(id);
+	public String showAddRoomPage(@PathVariable Long id, Model model) {
+		Hostel hostel=hstlRepo.findById(id).orElseThrow();
 		model.addAttribute("hostel", hostel);
+		model.addAttribute("room", new Room());
 		return "addRoom";
+	}
+	
+	@PostMapping("/addroom/save")
+	public String SaveAddRoom(@ModelAttribute Room room, @PathParam("hostelId") Long hostelId,RedirectAttributes redirectAttributes) {
+		Hostel hostel=hstlRepo.findById(hostelId).orElseThrow();
+		room.setParentHostel(hostel);
+		roomRepo.save(room);
+		redirectAttributes.addFlashAttribute("message","Room Added Successfully");
+		return "redirect:/admin/hostel_list";
 	}
 }

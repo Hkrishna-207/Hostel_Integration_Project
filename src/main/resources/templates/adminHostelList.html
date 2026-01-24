@@ -5,6 +5,11 @@
 <title>Admin connected hostels</title>
 </head>
 <body>
+
+	<div th:if="${message}">
+		<span>✔</span>
+		<span th:text="${message}"></span>
+	</div>
 	<h1 th:if="${hostels.isEmpty()}"
 		style="text-align: center; color: red;">
 		You do not added any hostels Yet

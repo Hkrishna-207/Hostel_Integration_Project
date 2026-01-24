@@ -1,14 +1,16 @@
 package com.hstls.intigration.models;
 
 import java.time.LocalDate;
+import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.SequenceGenerator;
+import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -34,9 +36,7 @@ public class Hostel {
 	private int rating;
 	private String genderType;
 	private LocalDate dateCreated;
-	private Integer fourShareCount;
-	private Integer threeShareCount;
-	private Integer twoShareCount;
-	private Integer oneShareCount;
+	@OneToMany(mappedBy = "parentHostel", cascade = CascadeType.ALL)
+	private List<Room> rooms;
 	
 }
