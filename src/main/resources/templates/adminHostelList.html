@@ -28,7 +28,7 @@
 				<tr th:each="h:${hostels}">
 					<td th:text="${h.name}"></td>
 					<td th:text="${h.address}"></td>
-					<td><a th:href="@{/user/hostel-details/{id}(id=${h.id})}"
+					<td><a th:href="@{/admin/hostel-details/{id}(id=${h.id})}"
 						style="text-decoration: none;"> <span
 							style="color: blue; margin-right: 10px;">See More</span>
 					</a> <a th:href="@{/admin/removehostel/{id}(id=${h.id})}"

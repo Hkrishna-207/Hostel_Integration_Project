@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Full Details of Hostel</title>
+</head>
+<body>
+	<table border="4">
+		<thead>
+			<tr>
+				<th>Total 4 share Rooms</th>
+				<th>Total 3 share Rooms</th>
+				<th>Total 2 share Rooms</th>
+				<th>Total 1 share Rooms</th>
+		</thead>
+		<tbody>
+			<tr>
+				<td th:text="${hostel.fourShareCount}"></td>
+				<td th:text="${hostel.threeShareCount}"></td>
+				<td th:text="${hostel.twoShareCount}"></td>
+				<td th:text="${hostel.oneShareCount}"></td>
+		</tbody>
+	</table>
+</body>
+</html>

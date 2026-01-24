@@ -67,8 +67,16 @@ public class AdminController {
 	}
 	
 	@GetMapping("/removehostel/{id}")
-	public String removeHostel(@PathVariable Long id) {
+	public String removeHostel(@PathVariable Long id, RedirectAttributes redirectAttributes) {
 		hstlRepo.deleteById(id);
+		redirectAttributes.addFlashAttribute("message", "Hostel  Removed Successfully");
 		return "redirect:/admin/dashboard";
+	}
+	
+	@GetMapping("/hostel-details/{id}")
+	public String showHostelDetails(@PathVariable Long id, Model model) {
+		Hostel hostel=hstlRepo.getById(id);
+		model.addAttribute("hostel", hostel);
+		return "hostelDetails";
 	}
 }
