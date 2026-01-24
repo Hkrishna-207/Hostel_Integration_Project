@@ -73,10 +73,10 @@ public class AdminController {
 		return "redirect:/admin/dashboard";
 	}
 	
-	@GetMapping("/hostel-details/{id}")
+	@GetMapping("/addroom/{id}")
 	public String showHostelDetails(@PathVariable Long id, Model model) {
 		Hostel hostel=hstlRepo.getById(id);
 		model.addAttribute("hostel", hostel);
-		return "hostelDetails";
+		return "addRoom";
 	}
 }
