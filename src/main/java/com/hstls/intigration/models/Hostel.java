@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -33,7 +34,8 @@ public class Hostel {
 	private User owner;
 	private String contactNumber;
 	private String address;
-	private int rating;
+	@Column(nullable = false)
+	private Integer rating=0;
 	private String genderType;
 	private LocalDate dateCreated;
 	@OneToMany(mappedBy = "parentHostel", cascade = CascadeType.ALL)

@@ -3,12 +3,17 @@ package com.hstls.intigration.serviceImpli;
 
 
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.hstls.intigration.models.Hostel;
 import com.hstls.intigration.models.User;
+import com.hstls.intigration.repository.HostelRepository;
 import com.hstls.intigration.repository.UserRepository;
 import com.hstls.intigration.service.UserService;
 
@@ -18,6 +23,12 @@ public class UserServiceImpli implements UserService {
 	
 	@Autowired
 	private UserRepository userRepo;
+	
+	@Autowired
+	private HostelRepository hostelRepo;
+	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 
 	@Override
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
@@ -38,6 +49,30 @@ public class UserServiceImpli implements UserService {
 				.roles(userRole.replace("ROLE_", ""))// spring adds role automatically
 				.build();
 	}
+
+	@Override
+	public void addUser(User user) {
+		String encodedPassword=passwordEncoder.encode(user.getPassword());
+		user.setPassword(encodedPassword);
+		userRepo.save(user);
+		
+	}
+
+	@Override
+	public void removeUser(Long id) {
+		userRepo.deleteById(id);
+		
+	}
+
+	@Override
+	public List<Hostel> getHostelList(String name, String location, Integer rating) {
+		
+		return hostelRepo.filterHostels(name, location, rating);
+	}
+	
+	
+	
+	
 
 	
 

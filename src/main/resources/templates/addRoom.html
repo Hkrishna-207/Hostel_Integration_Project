@@ -3,6 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <title>Add Room Details</title>
+<style>
+	.error-msg { color : red; font-size: 0.9em; margin-top: 5px;}
+	.input-error { border: 2px solid red;}
+</style>
 </head>
 <body>
 	<h2>
@@ -15,7 +19,11 @@
 		</div>
 		<div>
 			<label>Room Number :</label> <input type="text" th:field="*{roomNo}"
+				th:classappend ="${#fields.hasErrors('roomNo')} ? 'input-error' : '' "
 				required>
+			<p class = "error-msg"
+				th:if="${#fields.hasErrors('roomNo')}"
+				th:errors="*{roomNo}"></p>
 		</div>
 		<div>
 			<label>Room sharing</label> <Select th:field="*{bedCount}">
@@ -32,6 +40,9 @@
 				th:field="*{pricePerBed}" step="0.01" required>
 		</div>
 		<button type="submit" style="color: green;">Add Room</button>
+	</form>
+	<form th:action="@{/admin/hostel_list}">
+		<button type="submit">Cancel</button>
 	</form>
 </body>
 </html>
