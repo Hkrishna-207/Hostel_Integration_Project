@@ -6,6 +6,14 @@
 <style>
 	.error-msg { color : red; font-size: 0.9em; margin-top: 5px;}
 	.input-error { border: 2px solid red;}
+	
+	.btn-normal { background-color: grey;}
+	.btn-normal:hover {
+		background-color: green;
+	}
+	.btn-red { background-color: red; color: white;
+	}
+	.btn-grey { background-color: grey;}
 </style>
 </head>
 <body>
@@ -39,10 +47,13 @@
 			<label>Price per Bed :</label> <input type="number"
 				th:field="*{pricePerBed}" step="0.01" required>
 		</div>
-		<button type="submit" style="color: green;">Add Room</button>
+		<button type="submit" 
+		class="btn-normal"
+		th:classappend="${#fields.hasAnyErrors()}? 'btn-grey' : 'btn-normal'">Add Room</button>
 	</form>
 	<form th:action="@{/admin/hostel_list}">
-		<button type="submit">Cancel</button>
+		<button type="submit" 
+		class="btn-red">Cancel</button>
 	</form>
 </body>
 </html>

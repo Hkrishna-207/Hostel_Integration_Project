@@ -19,4 +19,6 @@ public interface HostelRepository extends JpaRepository<Hostel, Long> {
 	List<Hostel> filterHostels(@Param("name") String name,@Param("location") String location,@Param("rating") Integer rating);
 
 	List<Hostel> findAllByOwnerEmail(String email);
+
+	Hostel findByName(String hostelName);
 }

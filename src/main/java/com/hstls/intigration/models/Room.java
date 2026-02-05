@@ -1,13 +1,17 @@
 package com.hstls.intigration.models;
 
+import java.util.List;
+
 import org.hibernate.validator.constraints.UniqueElements;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
 import jakarta.validation.constraints.NotNull;
@@ -36,5 +40,7 @@ public class Room {
 	@ManyToOne
 	@JoinColumn(name="hostel_id", referencedColumnName = "id", nullable = false)
 	private Hostel parentHostel;
+	@OneToMany(mappedBy = "roomOwned", cascade = CascadeType.ALL)
+	private List<HostelEmployee> roomMembers;
 	
 }

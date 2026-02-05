@@ -40,5 +40,7 @@ public class Hostel {
 	private LocalDate dateCreated;
 	@OneToMany(mappedBy = "parentHostel", cascade = CascadeType.ALL)
 	private List<Room> rooms;
+	@OneToMany(mappedBy = "hostelOwned", cascade = CascadeType.ALL)
+	private List<HostelEmployee> employeeList;
 	
 }

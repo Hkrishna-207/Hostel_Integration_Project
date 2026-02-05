@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Add an Employee to Room</title>
+</head>
+<body>
+	<h1>Add a new candidate to a specific room</h1>
+	<form th:action="@{/admin/addEmployeeToRoom}" th:object="${emp}" method="post">
+		<div>
+			<label>Employee Name: </label>
+			<input type="text" th:field="*{empName}" required>
+		</div>
+		<div>
+			<label>Employee Age: </label>
+			<input type="number" th:field="*{empAge}">
+		</div>
+		<div>
+			<label>Working Company: </label>
+			<input type="text" th:field="*{workingCompany}">
+		</div>
+		<div>
+			<label>empAddress: </label>
+			<input type="text" th:field="*{empAddress}">
+		</div>
+		<div>
+			<label>Hostel Name: </label>
+			<select name="hostelName">
+			<option value="">Select Hostel</option>
+				<option value="SMH PG">Star Mens Pg</option>
+				<option value="OmGanesh Mens PG">Om Ganesh Mens Pg</option>
+			</select>
+		</div>
+		<div>
+			<label>Room No: </label>
+			<select name="roomNo">
+			<option value="">Select Room No.</option>
+				<option value="101">101</option>
+				<option value="102">102</option>
+				<option value="103">103</option>
+			</select>
+		</div>
+		<div>
+			<button type="submit">Add Employee</button>
+		</div>
+	</form>
+</body>
+</html>

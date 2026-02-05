@@ -26,6 +26,12 @@
         margin-right: 10px;
         font-size: 20px;
     }
+    #new-student {
+    	margin-left: 500px;
+    	margin-right: 10px;
+    	display: block;
+    	text-decoration: blink;
+    }
 	</style>
 </head>
 <body>
@@ -52,6 +58,10 @@
 
 	<form action="">
 		<button>Delete Hostel</button>
+	</form>
+	
+	<form th:action="@{/admin/addEmployee}" id="new-student">
+		<button type="submit">Add a new Person</button>
 	</form>
 
 	

@@ -16,6 +16,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.hstls.intigration.exception.RoomAlreadyExistsException;
 import com.hstls.intigration.models.Hostel;
+import com.hstls.intigration.models.HostelEmployee;
 import com.hstls.intigration.models.Room;
 import com.hstls.intigration.models.User;
 import com.hstls.intigration.repository.HostelRepository;
@@ -108,5 +109,18 @@ public class AdminController {
 		}
 		redirectAttributes.addFlashAttribute("message", "Room Added Successfully");
 		return "redirect:/admin/hostel_list";
+	}
+	
+	@GetMapping("/addEmployee")
+	public String showAddEmployeeForm(Model model) {
+		model.addAttribute("emp", new HostelEmployee());
+		return "addEmployeeToRoom";
+	}
+	
+	@PostMapping("/addEmployeeToRoom")
+	public String saveEmployeeDetails(@ModelAttribute HostelEmployee emp, @PathParam("roomNo") String roomNo, @PathParam("hostelName") String hostelName){
+	
+		adminService.saveEmployeeDetails(emp, roomNo, hostelName);
+		return "redirect:/admin/dashboard";
 	}
 }
