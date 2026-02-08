@@ -42,5 +42,7 @@ public class Hostel {
 	private List<Room> rooms;
 	@OneToMany(mappedBy = "hostelOwned", cascade = CascadeType.ALL)
 	private List<HostelEmployee> employeeList;
+	@OneToMany(mappedBy = "appliedHostel", cascade = CascadeType.ALL)
+	private List<EmpRequests> totalRequests;
 	
 }

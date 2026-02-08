@@ -35,7 +35,7 @@
 				<td th:text="${h.address}"></td>
 				<td th:text="${h.rating}"></td>
 				<td>
-					<form th:action="@{/user/applyform}" method="get">
+					<form th:action="@{/user/applyform/{id}(id=${h.id})}" method="get">
 						<button type="submit">Apply for Seat</button>
 					</form>
 				</td>

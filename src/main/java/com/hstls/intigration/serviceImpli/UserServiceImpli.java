@@ -11,8 +11,10 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.hstls.intigration.models.EmpRequests;
 import com.hstls.intigration.models.Hostel;
 import com.hstls.intigration.models.User;
+import com.hstls.intigration.repository.EmpRequestsRepository;
 import com.hstls.intigration.repository.HostelRepository;
 import com.hstls.intigration.repository.UserRepository;
 import com.hstls.intigration.service.UserService;
@@ -26,6 +28,9 @@ public class UserServiceImpli implements UserService {
 	
 	@Autowired
 	private HostelRepository hostelRepo;
+	
+	@Autowired
+	private EmpRequestsRepository empRequestRepo;
 	
 	@Autowired
 	private PasswordEncoder passwordEncoder;
@@ -68,6 +73,14 @@ public class UserServiceImpli implements UserService {
 	public List<Hostel> getHostelList(String name, String location, Integer rating) {
 		
 		return hostelRepo.filterHostels(name, location, rating);
+	}
+
+	@Override
+	public void saveEmpRequest(EmpRequests empRequest, Long hostel_id) {
+		Hostel appliedHostel=hostelRepo.findById(hostel_id).orElseThrow();
+		empRequest.setAppliedHostel(appliedHostel);
+		empRequestRepo.save(empRequest);
+		
 	}
 	
 	

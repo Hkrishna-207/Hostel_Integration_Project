@@ -3,19 +3,22 @@ package com.hstls.intigration.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.hstls.intigration.models.EmpRequests;
 import com.hstls.intigration.models.Hostel;
 import com.hstls.intigration.models.User;
 import com.hstls.intigration.repository.HostelRepository;
 import com.hstls.intigration.repository.UserRepository;
 import com.hstls.intigration.service.UserService;
+
+import jakarta.websocket.server.PathParam;
 
 
 @Controller
@@ -60,9 +63,17 @@ public class UserController {
 		return "showHostels";
 	}
 	
-	@GetMapping("/user/applyform")
-	public String showApplyForm() {
+	@GetMapping("/user/applyform/{id}")
+	public String showApplyForm(@PathVariable Long id, Model model) {
+		model.addAttribute("empRequest", new EmpRequests());
+		model.addAttribute("hostel_id", id);
 		return "applyForm";
+	}
+	
+	@PostMapping("/user/saveEmpRequest")
+	public String saveEmpRequests(@ModelAttribute EmpRequests empRequest, @PathParam("hostel_id") Long hostel_id) {
+		userService.saveEmpRequest(empRequest, hostel_id);
+		return "redirect:/user/dashboard";
 	}
 
 }

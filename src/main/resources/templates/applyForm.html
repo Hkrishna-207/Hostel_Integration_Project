@@ -5,27 +5,30 @@
 <title>Apply For Hostel Seat Page</title>
 </head>
 <body>
-	<form action="">
+	<form th:action="@{/user/saveEmpRequest}" th:object="${empRequest}" method="post">
+	
+		<input type="hidden" name="hostel_id" th:value="${hostel_id}">
+		
 		<div>
-			<label>Enter Name: </label> <input type="text" required>
+			<label>Enter Name: </label> <input type="text" th:field="*{empName}" required>
 		</div>
 		<div>
-			<label>Enter Age: </label> <input type="number" required>
+			<label>Enter Age: </label> <input type="number" th:field="*{empAge}" required>
 		</div>
 		<div>
-			<label>Enter Contact No: </label> <input type="tel" pattern="[0-9]{10}" required>
+			<label>Enter Contact No: </label> <input type="tel" pattern="[0-9]{10}" th:field="*{contactNo}" required>
 		</div>
 		<div>
-			<label>Enter Working Company: </label> <input type="text" required>
+			<label>Enter Working Company: </label> <input type="text" th:field="*{workingCompany}" required>
 		</div>
 		<div>
 			<label>Select Sharing Preference: </label>
-			<select>
-				<option>Sharing count</option>
-				<option>1 Share</option>
-				<option>2 Share</option>
-				<option>3 Share</option>
-				<option>4 Share</option>
+			<select th:field="*{roomPref}">
+				<option th:value="null">Sharing count</option>
+				<option th:value="1">1 Share</option>
+				<option th:value="2">2 Share</option>
+				<option th:value="3">3 Share</option>
+				<option th:value="4">4 Share</option>
 			</select>
 		</div>
 		<div>
