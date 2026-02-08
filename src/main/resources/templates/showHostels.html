@@ -5,12 +5,17 @@
 <title>User Dashboard List of hostels</title>
 </head>
 <body>
-	<h1>Hostel data</h1><p>Hostel data </p>
-	<h3 th:if="${hostels.isEmpty()}" style="text-align:center; color:red;">No Hostels found for those filters</h3>
-	<h3 th:if="${!hostels.isEmpty()}" style="text-align:center; color:purple;">
-		Found <span th:text="${hostels.size()}">0</span> Hostels matching your search
+	<h1>Hostel data</h1>
+	<p>Hostel data</p>
+	<h3 th:if="${hostels.isEmpty()}"
+		style="text-align: center; color: red;">No Hostels found for
+		those filters</h3>
+	<h3 th:if="${!hostels.isEmpty()}"
+		style="text-align: center; color: purple;">
+		Found <span th:text="${hostels.size()}">0</span> Hostels matching your
+		search
 	</h3>
-	
+
 	<table border="1" th:if="${!hostels.isEmpty()}">
 		<thead>
 			<tr>
@@ -22,14 +27,18 @@
 				<th>Apply for Seat</th>
 			</tr>
 		</thead>
-		<tbody >
-			<tr th:each = "h:${hostels}" >
+		<tbody>
+			<tr th:each="h:${hostels}">
 				<td th:text="${h.name}"></td>
 				<td th:text="${h.ownerName}"></td>
 				<td th:text="${h.contactNumber}"></td>
 				<td th:text="${h.address}"></td>
 				<td th:text="${h.rating}"></td>
-				<td><button>Apply for Seat</button></td>
+				<td>
+					<form th:action="@{/user/applyform}" method="get">
+						<button type="submit">Apply for Seat</button>
+					</form>
+				</td>
 		</tbody>
 	</table>
 </body>

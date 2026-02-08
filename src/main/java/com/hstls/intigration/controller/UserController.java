@@ -54,10 +54,15 @@ public class UserController {
 	@GetMapping("/user/showhostels")
 	public String showListOfHostels(@RequestParam(required = false) String name,@RequestParam(required = false) String location,@RequestParam(required = false) String rating,Model model) {
 		
-		List<Hostel> resultList=userService.getHostelList(name, location, rating.isEmpty()?0:Integer.valueOf(rating));//Integer.parseInt(rating)
+		List<Hostel> resultList=userService.getHostelList(name, location, rating==null?0:Integer.parseInt(rating));//Integer.parseInt(rating)
 
 		model.addAttribute("hostels",resultList);
 		return "showHostels";
+	}
+	
+	@GetMapping("/user/applyform")
+	public String showApplyForm() {
+		return "applyForm";
 	}
 
 }
