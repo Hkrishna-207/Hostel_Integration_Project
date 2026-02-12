@@ -6,6 +6,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.SequenceGenerator;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,9 +20,15 @@ import lombok.Setter;
 public class EmpRequests {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "requestId_seq")
+	@SequenceGenerator(
+			name="requestId_seq",
+			initialValue = 100000,
+			allocationSize = 1
+	)
+	private Long requestId;
 	private String empName;
+	private String email;
 	private String empAge;
 	private String contactNo;
 	private String workingCompany;

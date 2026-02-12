@@ -4,6 +4,8 @@ package com.hstls.intigration.serviceImpli;
 
 
 import java.util.List;
+import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -31,6 +33,9 @@ public class UserServiceImpli implements UserService {
 	
 	@Autowired
 	private EmpRequestsRepository empRequestRepo;
+	
+	@Autowired
+	private EmailService emailService;
 	
 	@Autowired
 	private PasswordEncoder passwordEncoder;
@@ -79,7 +84,18 @@ public class UserServiceImpli implements UserService {
 	public void saveEmpRequest(EmpRequests empRequest, Long hostel_id) {
 		Hostel appliedHostel=hostelRepo.findById(hostel_id).orElseThrow();
 		empRequest.setAppliedHostel(appliedHostel);
+		//Random rnd=new Random();
+		//int randInt=rnd.nextInt(100000, 999999);
 		empRequestRepo.save(empRequest);
+		emailService.sendMail(
+				empRequest.getEmail(), 
+				"Hostel Request Generated", 
+				"Hii "+empRequest.getEmpName()+"/n"
+				+"Your Request was Accepted and here are  the Request Details : "
+				+"Request ID : "+empRequest.getRequestId()
+				+"Your requested Hostel : "+appliedHostel.getName()
+				+"Prefered Room : "+empRequest.getRoomPref());
+		
 		
 	}
 	
