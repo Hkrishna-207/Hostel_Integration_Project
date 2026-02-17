@@ -44,13 +44,19 @@
 			<span class="check-icon">✔</span> <span th:text="${message}"></span>
 		</div>
 	</div>
-	<div id="requests" th:if="${requestCount}">
-		<h2><span>Total New Requests : </span>
-			<span th:text="${requestCount}">0</span>
-		</h2>
-	</div>
+	
 
 	<h1 style="text-align: center; color: red">Admin Dashboard</h1>
+	
+	<div id="requests" th:if="${requestCount}">
+		<form th:action="@{/admin/showrequests}">
+		<button type="submit">
+		<h3><span>Total New Requests : </span>
+			<span th:text="${requestCount}">0</span>
+		</h3>
+		</button>
+		</form>
+	</div>
 	<form th:action="@{/admin/hostel_list}">
 		<button type="submit">Hostel List</button>
 	</form>

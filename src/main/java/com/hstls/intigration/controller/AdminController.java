@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.hstls.intigration.exception.RoomAlreadyExistsException;
+import com.hstls.intigration.models.EmpRequests;
 import com.hstls.intigration.models.Hostel;
 import com.hstls.intigration.models.HostelEmployee;
 import com.hstls.intigration.models.Room;
@@ -42,11 +43,18 @@ public class AdminController {
 
 	@Autowired
 	private RoomRepository roomRepo;
+	
+	@GetMapping("/showrequests")
+	public String showRequestsPage(Principal principal, Model model) {
+		List<EmpRequests> empRequests=adminService.getHostelRequests(principal.getName());
+		model.addAttribute("empRequests",empRequests);
+		return "showEmpRequests";
+	}
 
 	@GetMapping("/dashboard")
 	public String showAdminDashboard(Principal principal, Model model) {
 		String ownerEmail=principal.getName();
-		int requestCount=adminService.getHostelRequestsCount(ownerEmail);
+		int requestCount=adminService.getHostelRequests(ownerEmail).size();
 		model.addAttribute("requestCount", requestCount);
 		return "adminDashboard";
 	}

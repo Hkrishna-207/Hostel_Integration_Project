@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>New Hostel Requests page</title>
+</head>
+<body>
+	<table border="4">
+		<thead>
+			<tr>
+				<th>Employee Name</th>
+				<th>Requested Hostel</th>
+				<th>Room Preference</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="emp:${empRequests}">
+				<td th:text="${emp.empName}"></td>
+				<td th:text="${emp.appliedHostel.getName()}"></td>
+				<td th:text="${emp.roomPref}"></td>
+			</tr>
+		</tbody>
+	</table>
+</body>
+</html>

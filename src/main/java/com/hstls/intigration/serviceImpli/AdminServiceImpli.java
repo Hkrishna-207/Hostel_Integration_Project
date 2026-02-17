@@ -79,13 +79,13 @@ public class AdminServiceImpli implements AdminService{
 	}
 
 	@Override
-	public int getHostelRequestsCount(String ownerEmail) {
+	public List<EmpRequests> getHostelRequests(String ownerEmail) {
 		List<EmpRequests> empRequestsOfOwner=new ArrayList<>();
 		List<Hostel> hostelList=hostelRepo.findAllByOwnerEmail(ownerEmail);
 		for(Hostel hostel:hostelList) {
 		empRequestsOfOwner=empRequestRepo.findAllByAppliedHostelId(hostel.getId());
 		}
-		return empRequestsOfOwner.size();
+		return empRequestsOfOwner;
 	}
 
 }

@@ -2,6 +2,7 @@ package com.hstls.intigration.service;
 
 import java.util.List;
 
+import com.hstls.intigration.models.EmpRequests;
 import com.hstls.intigration.models.Hostel;
 import com.hstls.intigration.models.HostelEmployee;
 import com.hstls.intigration.models.Room;
@@ -19,5 +20,5 @@ public interface AdminService {
 	
 	public void saveEmployeeDetails(HostelEmployee emp,String roomNo, String ownerEmail);
 
-	public int getHostelRequestsCount(String ownerEmail);
+	public List<EmpRequests> getHostelRequests(String ownerEmail);
 }
