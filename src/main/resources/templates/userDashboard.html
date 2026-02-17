@@ -1,35 +1,53 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Dashboard</title>
+<title>Dashboard</title>
 </head>
 <body>
-    <h1 style="text-align: center; color: purple">Welcome to your Dashboard!</h1>
-    <p>You have successfully logged in.</p>
-    
-    <form th:action="@{/user/showhostels}">
-    	<button type="submit">View Hostels</button>
-    </form>
-    <div style="background-color: #f4f4f4; padding: 20px; border-radius: 10px; margin: 20px 0;">
-    <h3>Search Hostels</h3>
-    <form th:action="@{/user/showhostels}" method="get">
-        <input type="text" name="name" placeholder="Search by Name...">
-        <input type="text" name="location" placeholder="Search by Location...">
-        
-        <select name="rating">
-            <option value="">Select Rating</option>
-            <option value="5">5 Stars</option>
-            <option value="4">4+ Stars</option>
-            <option value="3">3+ Stars</option>
-        </select>
-        
-        <button type="submit" style="background-color: purple; color: white;">Search</button>
-        <a th:href="@{/user/dashboard}" style="font-size: 0.8em;">Clear Filters</a>
-    </form>
-</div>
-    
-    <form th:action="@{/logout}" method="post">
-        <button type="submit">Logout</button>
-    </form>
+
+	<div th:if="${message}" class="alert-success" role="alert">
+		<span th:text="${message}"></span>
+	</div>
+
+
+	<h1 style="text-align: center; color: purple">Welcome to your
+		Dashboard!</h1>
+	<p>You have successfully logged in.</p>
+
+	<form th:action="@{/user/showhostels}">
+		<button type="submit">View Hostels</button>
+	</form>
+	<div
+		style="background-color: #f4f4f4; padding: 20px; border-radius: 10px; margin: 20px 0;">
+		<h3>Search Hostels</h3>
+		<form th:action="@{/user/showhostels}" method="get">
+			<input type="text" name="name" placeholder="Search by Name...">
+			<input type="text" name="location"
+				placeholder="Search by Location..."> <select name="rating">
+				<option value="">Select Rating</option>
+				<option value="5">5 Stars</option>
+				<option value="4">4+ Stars</option>
+				<option value="3">3+ Stars</option>
+			</select>
+
+			<button type="submit" style="background-color: purple; color: white;">Search</button>
+			<a th:href="@{/user/dashboard}" style="font-size: 0.8em;">Clear
+				Filters</a>
+		</form>
+	</div>
+
+	<form th:action="@{/logout}" method="post">
+		<button type="submit">Logout</button>
+	</form>
+
+	<script th:inline="javascript" >
+		///*[# th:if="${message}"]*/
+			var msg=/*[[${message}]]*/ 'default message';
+		if(msg){
+			alert(msg);
+		}
+		
+    	
+    </script>
 </body>
 </html>

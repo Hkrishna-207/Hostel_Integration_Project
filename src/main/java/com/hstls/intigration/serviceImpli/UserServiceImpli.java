@@ -81,7 +81,8 @@ public class UserServiceImpli implements UserService {
 	}
 
 	@Override
-	public void saveEmpRequest(EmpRequests empRequest, Long hostel_id) {
+	public String saveEmpRequest(EmpRequests empRequest, Long hostel_id) {
+		try {
 		Hostel appliedHostel=hostelRepo.findById(hostel_id).orElseThrow();
 		empRequest.setAppliedHostel(appliedHostel);
 		//Random rnd=new Random();
@@ -94,9 +95,11 @@ public class UserServiceImpli implements UserService {
 				+"Your Request was Accepted and here are  the Request Details : "
 				+"Request ID : "+empRequest.getRequestId()
 				+"Your requested Hostel : "+appliedHostel.getName()
-				+"Prefered Room : "+empRequest.getRoomPref());
-		
-		
+				+"Prefered Room : "+empRequest.getRoomPref()+" Share");
+		}catch (Exception e) {
+			return e.getMessage();
+		}
+		return "Congrats.!"+"\n"+"Your Request is generated with RequestId : "+empRequest.getRequestId();	
 	}
 	
 	

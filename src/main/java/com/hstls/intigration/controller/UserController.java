@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.hstls.intigration.models.EmpRequests;
 import com.hstls.intigration.models.Hostel;
@@ -71,8 +72,9 @@ public class UserController {
 	}
 	
 	@PostMapping("/user/saveEmpRequest")
-	public String saveEmpRequests(@ModelAttribute EmpRequests empRequest, @PathParam("hostel_id") Long hostel_id) {
-		userService.saveEmpRequest(empRequest, hostel_id);
+	public String saveEmpRequests(@ModelAttribute EmpRequests empRequest, @PathParam("hostel_id") Long hostel_id, RedirectAttributes redirectAttributes) {
+		String message=userService.saveEmpRequest(empRequest, hostel_id);
+		redirectAttributes.addFlashAttribute("message", message);
 		return "redirect:/user/dashboard";
 	}
 
