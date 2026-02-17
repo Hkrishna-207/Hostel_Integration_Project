@@ -1,15 +1,18 @@
 package com.hstls.intigration.serviceImpli;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.hstls.intigration.exception.RoomAlreadyExistsException;
+import com.hstls.intigration.models.EmpRequests;
 import com.hstls.intigration.models.Hostel;
 import com.hstls.intigration.models.HostelEmployee;
 import com.hstls.intigration.models.Room;
 import com.hstls.intigration.models.User;
+import com.hstls.intigration.repository.EmpRequestsRepository;
 import com.hstls.intigration.repository.HostelEmployeeRepository;
 import com.hstls.intigration.repository.HostelRepository;
 import com.hstls.intigration.repository.RoomRepository;
@@ -30,6 +33,9 @@ public class AdminServiceImpli implements AdminService{
 	
 	@Autowired
 	private HostelEmployeeRepository empRepo;
+	
+	@Autowired
+	private EmpRequestsRepository empRequestRepo;
 
     
 
@@ -70,6 +76,16 @@ public class AdminServiceImpli implements AdminService{
 		emp.setHostelOwned(hostel);
 		empRepo.save(emp);
 		
+	}
+
+	@Override
+	public int getHostelRequestsCount(String ownerEmail) {
+		List<EmpRequests> empRequestsOfOwner=new ArrayList<>();
+		List<Hostel> hostelList=hostelRepo.findAllByOwnerEmail(ownerEmail);
+		for(Hostel hostel:hostelList) {
+		empRequestsOfOwner=empRequestRepo.findAllByAppliedHostelId(hostel.getId());
+		}
+		return empRequestsOfOwner.size();
 	}
 
 }

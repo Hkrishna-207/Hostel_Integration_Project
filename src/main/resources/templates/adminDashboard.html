@@ -3,55 +3,62 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-	<style>
-    .toast-alert {
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        background-color: #4CAF50; /* Green */
-        color: white;
-        padding: 16px;
-        border-radius: 8px;
-        box-shadow: 0px 4px 10px rgba(0,0,0,0.2);
-        z-index: 1000;
-        min-width: 250px;
-        transition: opacity 0.5s ease-out; /* Smooth fade out */
-    }
-    .toast-content {
-        display: flex;
-        align-items: center;
-        font-weight: bold;
-    }
-    .check-icon {
-        margin-right: 10px;
-        font-size: 20px;
-    }
-    #new-student {
-    	margin-left: 500px;
-    	margin-right: 10px;
-    	display: block;
-    	text-decoration: blink;
-    }
-	</style>
+<style>
+.toast-alert {
+	position: fixed;
+	top: 20px;
+	right: 20px;
+	background-color: #4CAF50; /* Green */
+	color: white;
+	padding: 16px;
+	border-radius: 8px;
+	box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+	z-index: 1000;
+	min-width: 250px;
+	transition: opacity 0.5s ease-out; /* Smooth fade out */
+}
+
+.toast-content {
+	display: flex;
+	align-items: center;
+	font-weight: bold;
+}
+
+.check-icon {
+	margin-right: 10px;
+	font-size: 20px;
+}
+
+#new-student {
+	margin-left: 500px;
+	margin-right: 10px;
+	display: block;
+	text-decoration: blink;
+}
+</style>
 </head>
 <body>
 
 	<div th:if="${message}" id="success-toast" class="toast-alert">
-    <div class="toast-content">
-        <span class="check-icon">✔</span>
-        <span th:text="${message}"></span>
-    </div>
+		<div class="toast-content">
+			<span class="check-icon">✔</span> <span th:text="${message}"></span>
+		</div>
 	</div>
-	
-	<h1 style="text-align: center; color:red">Admin Dashboard</h1>
+	<div id="requests" th:if="${requestCount}">
+		<h2><span>Total New Requests : </span>
+			<span th:text="${requestCount}">0</span>
+		</h2>
+	</div>
+
+	<h1 style="text-align: center; color: red">Admin Dashboard</h1>
 	<form th:action="@{/admin/hostel_list}">
 		<button type="submit">Hostel List</button>
 	</form>
-	
-	<form th:action="@{/admin/addhostel}" >
+
+	<form th:action="@{/admin/addhostel}">
 		<button type="submit">Add Hostel</button>
 	</form>
-	
+
 	<form action="">
 		<button>Update Hostel</button>
 	</form>
@@ -59,16 +66,16 @@
 	<form action="">
 		<button>Delete Hostel</button>
 	</form>
-	
+
 	<form th:action="@{/admin/addEmployee}" id="new-student">
 		<button type="submit">Add a new Person</button>
 	</form>
 
-	
+
 	<form th:action="@{/logout}" method="post">
 		<button type="submit">Logout</button>
 	</form>
-	
+
 	<script>
     window.onload = function() {
         var toast = document.getElementById('success-toast');

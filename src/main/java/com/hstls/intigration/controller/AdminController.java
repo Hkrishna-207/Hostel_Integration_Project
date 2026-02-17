@@ -44,7 +44,10 @@ public class AdminController {
 	private RoomRepository roomRepo;
 
 	@GetMapping("/dashboard")
-	public String showAdminDashboard() {
+	public String showAdminDashboard(Principal principal, Model model) {
+		String ownerEmail=principal.getName();
+		int requestCount=adminService.getHostelRequestsCount(ownerEmail);
+		model.addAttribute("requestCount", requestCount);
 		return "adminDashboard";
 	}
 

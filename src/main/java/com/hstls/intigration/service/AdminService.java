@@ -18,4 +18,6 @@ public interface AdminService {
 	public User getCurrentAdmin(String email);
 	
 	public void saveEmployeeDetails(HostelEmployee emp,String roomNo, String ownerEmail);
+
+	public int getHostelRequestsCount(String ownerEmail);
 }
